@@ -1,10 +1,7 @@
 import Note from '../models/note';
 import Lane from '../models/lane';
+import mongoose from 'mongoose';
 import uuid from 'uuid';
-
-export function getSomething(req, res) {
-  return res.status(200).end();
-}
 
 export function addNote(req, res) {
   const { note, laneId } = req.body;
@@ -36,16 +33,35 @@ export function addNote(req, res) {
 export function deleteNote(req, res) {
   Note
     .findOne({ id: req.params.noteId })
-    .exec((err, note) => {
-      if (err) {
-        res.status(500).send(err);
+    .exec((noteErr, note) => {
+      if (noteErr) {
+        res.status(500).send(noteErr);
       }
 
-      note.remove(() => {
-        res.status(200).end();
-      });
+      Lane
+        .findOne({ notes: { $in: [mongoose.Types.ObjectId(note._id)] } })
+        .exec((laneErr, lane) => {
+          if (laneErr) {
+            res.status(500).send(laneErr);
+          }
+
+          lane
+            .update(
+              { $pull: { notes: mongoose.Types.ObjectId(note._id) } },
+              (updateErr) => {
+                if (updateErr) {
+                  res.status(500).send(updateErr);
+                }
+
+                note.remove(() => {
+                  res.status(200).end();
+                });
+              }
+            );
+        });
     });
 }
+
 export function editNote(req, res) {
   if (!req.body.task) {
     res.status(400).end();
