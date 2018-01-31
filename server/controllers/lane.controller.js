@@ -56,12 +56,12 @@ export function editLane(req, res) {
         res.status(500).send(err);
       }
 
-      lane.update({ name: req.body.name }, (updateErr) => {
+      lane.update({ name: req.body.name }, (updateErr, updated) => {
         if (updateErr) {
           res.status(500).send(err);
         }
 
-        res.status(200).end();
+        res.json(updated);
       });
     });
 }

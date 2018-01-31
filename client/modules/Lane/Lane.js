@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import NotesContainer from '../Note/NotesContainer';
-import Edit from '..client/components/Edit';
+import Edit from '../../components/Edit';
 
 import styles from './Lane.css';
 
 const Lane = (props) => {
-  const { lane, laneNotes, updateLane, addNote, deleteLane } = props;
+  const { lane, laneNotes, updateLane, addNote, deleteLane, editLane } = props;
   const laneId = lane.id;
 
   return (
@@ -40,6 +40,7 @@ Lane.propTypes = {
   addNote: PropTypes.func,
   updateLane: PropTypes.func,
   deleteLane: PropTypes.func,
+  editLane: PropTypes.func,
 };
 
 export default Lane;

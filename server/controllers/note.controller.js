@@ -73,11 +73,11 @@ export function editNote(req, res) {
       if (err) {
         res.status(500).send(err);
       }
-      note.update({ task: req.body.task }, (updateErr) => {
+      note.update({ task: req.body.task }, (updateErr, updated) => {
         if (updateErr) {
           res.status(500).send(err);
         }
-        res.status(200).end();
+        res.json(updated);
       });
     });
 }
