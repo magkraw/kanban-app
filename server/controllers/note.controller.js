@@ -68,16 +68,10 @@ export function editNote(req, res) {
   }
 
   Note
-    .findOne({ id: req.params.noteId })
-    .exec((err, note) => {
-      if (err) {
-        res.status(500).send(err);
+    .findOneAndUpdate({ id: req.params.noteId }, { task: req.body.task }, { new: true }, (updateErr, updated) => {
+      if (updateErr) {
+        res.status(500).send(updateErr);
       }
-      note.update({ task: req.body.task }, (updateErr, updated) => {
-        if (updateErr) {
-          res.status(500).send(err);
-        }
-        res.json(updated);
-      });
+      res.json(updated);
     });
 }

@@ -49,19 +49,11 @@ export function editLane(req, res) {
     res.status(400).end();
   }
 
-  Lane
-    .findOne({ id: req.params.laneId })
-    .exec((err, lane) => {
-      if (err) {
-        res.status(500).send(err);
-      }
+  Lane.findOneAndUpdate({ id: req.params.laneId }, { name: req.body.name }, { new: true }, (updateErr, updated) => {
+    if (updateErr) {
+      res.status(500).send(updateErr);
+    }
 
-      lane.update({ name: req.body.name }, (updateErr, updated) => {
-        if (updateErr) {
-          res.status(500).send(err);
-        }
-
-        res.json(updated);
-      });
-    });
+    res.json(updated);
+  });
 }

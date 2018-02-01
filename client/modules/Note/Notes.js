@@ -6,7 +6,7 @@ import styles from './Note.css';
 
 const Notes = ({ notes, laneId, editNote, onUpdate, deleteNote }) => {
   return (
-    <ul className={styles.Notes}>{notes.map((note) =>
+    <ul>{notes.map((note) =>
       <Note
         id={note.id}
         key={note.id}
@@ -16,11 +16,10 @@ const Notes = ({ notes, laneId, editNote, onUpdate, deleteNote }) => {
           editing={note.editing}
           value={note.task}
           onValueClick={() => editNote(note.id)}
-          onUpdate={(task) => onUpdate({
-            ...note,
+          onUpdate={(task) => onUpdate(
             task,
-            editing: false,
-          })}
+            note.id 
+          )}
           onDelete={() => deleteNote(note.id, laneId)}
         />
       </Note>
