@@ -9,7 +9,6 @@ export const EDIT_LANE = 'EDIT_LANE';
 export const UPDATE_LANE = 'UPDATE_LANE';
 export const DELETE_LANE = 'DELETE_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
-export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
 export const MOVE_WITHIN_LANE = 'MOVE_WITHIN_LANE';
 
 // Export Actions
@@ -83,15 +82,6 @@ export function fetchLanes() {
       dispatch(createLanes(normalizedLanes));
       dispatch(createNotes(notes));
     });
-  };
-}
-
-export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
-  return {
-    type: MOVE_BETWEEN_LANES,
-    targetLaneId,
-    noteId,
-    sourceLaneId,
   };
 }
 

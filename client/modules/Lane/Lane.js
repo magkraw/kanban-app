@@ -5,11 +5,11 @@ import Edit from '../../components/Edit';
 import styles from './Lane.css';
 
 const Lane = (props) => {
-  const { connectDropTarget, lane, laneNotes, editLane, addNote, deleteLane, updateLane } = props;
+  const { connectDropTarget, lane, laneNotes, editLane, addNote, deleteLane, updateLane, className } = props;
   const laneId = lane.id;
 
   return connectDropTarget(
-    <div>
+    <div className={className}>
       <div>
         <div>
           <button onClick={() => addNote({ task: 'New Note' }, laneId)}>Add Note</button>

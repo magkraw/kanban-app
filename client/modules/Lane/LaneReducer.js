@@ -4,10 +4,9 @@ import {
   UPDATE_LANE,
   DELETE_LANE,
   EDIT_LANE,
-  MOVE_BETWEEN_LANES,
   MOVE_WITHIN_LANE,
 } from './LaneActions';
-import { DELETE_NOTE, CREATE_NOTE } from '../Note/NoteActions';
+import { DELETE_NOTE, CREATE_NOTE, MOVE_BETWEEN_LANES } from '../Note/NoteActions';
 
 import omit from 'lodash/omit';
 

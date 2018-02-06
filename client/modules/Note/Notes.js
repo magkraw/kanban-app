@@ -6,7 +6,7 @@ import styles from './Note.css';
 
 const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane }) => {
   return (
-    <ul>{notes.map((note) =>
+    <ul className={styles.notes}>{notes.map((note) =>
       <Note
         id={note.id}
         key={note.id}

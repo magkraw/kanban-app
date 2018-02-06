@@ -6,6 +6,7 @@ export const EDIT_NOTE = 'EDIT_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const CREATE_NOTES = 'CREATE_NOTES';
+export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
 
 // Export Actions
 
@@ -67,5 +68,14 @@ export function deleteNoteRequest(noteId, laneId) {
     return callApi(`notes/${noteId}`, 'delete').then(() => {
       dispatch(deleteNote(noteId, laneId));
     });
+  };
+}
+
+export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
+  return {
+    type: MOVE_BETWEEN_LANES,
+    targetLaneId,
+    noteId,
+    sourceLaneId,
   };
 }
