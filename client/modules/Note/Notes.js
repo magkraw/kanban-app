@@ -4,21 +4,22 @@ import Note from './Note';
 
 import styles from './Note.css';
 
-const Notes = ({ notes, laneId, editNote, onUpdate, deleteNote }) => {
+const Notes = ({ notes, laneId, editNote, updateNote, deleteNote, moveWithinLane }) => {
   return (
     <ul>{notes.map((note) =>
       <Note
         id={note.id}
         key={note.id}
-        editing={note.editing}
+        moveWithinLane={moveWithinLane}
+        laneId={laneId}
       >
         <Edit
           editing={note.editing}
           value={note.task}
           onValueClick={() => editNote(note.id)}
-          onUpdate={(task) => onUpdate(
+          onUpdate={(task) => updateNote(
             task,
-            note.id 
+            note.id
           )}
           onDelete={() => deleteNote(note.id, laneId)}
         />
@@ -28,10 +29,11 @@ const Notes = ({ notes, laneId, editNote, onUpdate, deleteNote }) => {
 
 Notes.propTypes = {
   deleteNote: PropTypes.func,
-  onUpdate: PropTypes.func,
+  updateNote: PropTypes.func,
   laneId: PropTypes.string,
   editNote: PropTypes.func,
   notes: PropTypes.array,
+  moveWithinLane: PropTypes.func,
 };
 
 export default Notes;
